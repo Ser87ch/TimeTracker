@@ -3,5 +3,10 @@
 
     <string name="app_name">TimeTracker</string>
     <string name="menu_settings">Settings</string>
+    <string name="AddTimeText">Time</string>
+    <string name="AddNotesText">Notes</string>
+    <string name="ButtonSaveNoteText">Save</string>
+    <string name="ButtonCancelNoteText">Cancel</string>
+    <string name="AddButtonText">Add</string>
 
 </resources>

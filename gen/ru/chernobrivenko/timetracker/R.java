@@ -14,6 +14,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+        public static final int add_time_menu_time=0x7f070004;
         public static final int menu_settings=0x7f070003;
         public static final int notes_view=0x7f070002;
         public static final int time_view=0x7f070001;
@@ -21,12 +22,19 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int time_list_item=0x7f030001;
+        public static final int add_time=0x7f030001;
+        public static final int time_list_item=0x7f030002;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;
+        public static final int time_list_menu=0x7f060001;
     }
     public static final class string {
+        public static final int AddButtonText=0x7f040006;
+        public static final int AddNotesText=0x7f040003;
+        public static final int AddTimeText=0x7f040002;
+        public static final int ButtonCancelNoteText=0x7f040005;
+        public static final int ButtonSaveNoteText=0x7f040004;
         public static final int app_name=0x7f040000;
         public static final int menu_settings=0x7f040001;
     }

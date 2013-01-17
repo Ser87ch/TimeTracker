@@ -2,6 +2,7 @@ package ru.chernobrivenko.timetracker;
 
 import java.util.ArrayList;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,4 +57,8 @@ public class TimeTrackerAdapter extends BaseAdapter {
 		return view;
 	}
 
+	public void addTimeRecord(String time, String notes) {
+		times.add(new TimeRecord(time, notes));
+	}
+	
 }
