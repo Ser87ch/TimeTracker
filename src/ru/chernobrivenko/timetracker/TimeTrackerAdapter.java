@@ -1,64 +1,37 @@
 package ru.chernobrivenko.timetracker;
 
-import java.util.ArrayList;
 
-
+import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-public class TimeTrackerAdapter extends BaseAdapter {
-	private ArrayList<TimeRecord> times = new ArrayList<TimeRecord>();
+public class TimeTrackerAdapter extends CursorAdapter {
 
-	public TimeTrackerAdapter()
+
+	public TimeTrackerAdapter(Context context, Cursor cursor)
 	{
-		times.add(new TimeRecord("38:23", "Feeling good!"));
-		times.add(new TimeRecord("49:01", "Tired. Needed more caffeine"));
-		times.add(new TimeRecord("26:21", "I’m rocking it!"));
-		times.add(new TimeRecord("29:42", "Lost some time on the hills, but pretty good."));
+		super(context, cursor, true);
 	}
 
 	@Override
-	public int getCount() {
-
-		return times.size();
-	}
-
-	@Override
-	public Object getItem(int index) {
-
-		return times.get(index);
-	}
-
-	@Override
-	public long getItemId(int index) {
-
-		return index;
-	}
-
-	@Override
-	public View getView(int index, View view, ViewGroup parent) {
-		if(view == null)
-		{
-			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-			view = inflater.inflate(R.layout.time_list_item, parent, false);
-		}
-
-		TimeRecord time = times.get(index);
-
+	public void bindView(View view, Context context, Cursor cursor) {
 		TextView timeTextView = (TextView) view.findViewById(R.id.time_view);
-		timeTextView.setText(time.getTime());
-
+		timeTextView.setText(cursor.getString(1));
 		TextView notesTextView = (TextView) view.findViewById(R.id.notes_view);
-		notesTextView.setText(time.getNotes());
-
-		return view;
+		notesTextView.setText(cursor.getString(2));
+		
 	}
 
-	public void addTimeRecord(String time, String notes) {
-		times.add(new TimeRecord(time, notes));
+	@Override
+	public View newView(Context context, Cursor cursor, ViewGroup parent) {
+		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+		View view = inflater.inflate(R.layout.time_list_item, parent, false);
+		return view;
 	}
 	
 }

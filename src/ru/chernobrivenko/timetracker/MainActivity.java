@@ -2,24 +2,32 @@ package ru.chernobrivenko.timetracker;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-	TimeTrackerAdapter timeTrackerAdapter;
+	private TimeTrackerAdapter timeTrackerAdapter;
+	private TimeListDatabaseHelper databaseHelper;
 	public static final int TIME_ENTRY_REQUEST_CODE = 1;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		databaseHelper = new TimeListDatabaseHelper(this);
 		
 		ListView lW = (ListView) findViewById(R.id.times_list);
-		timeTrackerAdapter = new TimeTrackerAdapter();
+		timeTrackerAdapter = new TimeTrackerAdapter(this, databaseHelper.getAllTimeRecords());
 		lW.setAdapter(timeTrackerAdapter);
+
+		
 	}
 
 	@Override
@@ -41,8 +49,8 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if(requestCode == TIME_ENTRY_REQUEST_CODE)
@@ -51,11 +59,14 @@ public class MainActivity extends Activity {
 			{
 				String notes = data.getStringExtra("notes");
 				String time = data.getStringExtra("time");
+
+				databaseHelper.saveRecord(time, notes);
 				
-				timeTrackerAdapter.addTimeRecord(time, notes);
-				timeTrackerAdapter.notifyDataSetChanged();
+				timeTrackerAdapter.changeCursor(databaseHelper.getAllTimeRecords());
 			}
 		}
 	}
+
 	
 }
+
