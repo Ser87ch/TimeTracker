@@ -62,11 +62,15 @@ public class MainActivity extends Activity {
 
 				databaseHelper.saveRecord(time, notes);
 				
-				timeTrackerAdapter.changeCursor(databaseHelper.getAllTimeRecords());
+				refreshActivity();
 			}
 		}
 	}
 
+	private void refreshActivity()
+	{
+		timeTrackerAdapter.changeCursor(databaseHelper.getAllTimeRecords());
+	}
 	
 }
 
